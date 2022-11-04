@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Set title and set up Progressive Web App functionality -->
+    <title>OpenCamRemote Web Control</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="OpenCamRemote">
+  </head>
+  <body>
+    <!-- Pan and Tilt buttons -->
+    <div class="control-container" id="button-container">
+      <button id="up" onmousedown="up();" onmouseup="ystop();">Up</button><br>
+      <button id="left" onmousedown="left();" onmouseup="xstop();">Left</button><button id="right" onmousedown="right();" onmouseup="xstop();">Right</button><br>
+      <button id="down" onmousedown="down();" onmouseup="ystop();">Down</button>
+    </div>
+    
+    <!-- Javascript -->
+    <script>
+	// URL to the OpenCamRemote REST API
+	var baseURL = prompt("What is the URL to the server?", "http://opencamremote:8080");
+	
+	// Request Listener
+	function reqListener() {
+		console.log(this.responseText);
+	}
+	
+	// Button Functions
+	function up() {
+		const upReq = new XMLHttpRequest();
+		upReq.addEventListener("load", reqListener);
+		upReq.open("GET", `${baseURL}/y/ccw`);
+		upReq.send();
+	}
+	function down() {
+		const downReq = new XMLHttpRequest();
+		downReq.addEventListener("load", reqListener);
+		downReq.open("GET", `${baseURL}/y/cw`);
+		downReq.send();
+	}
+	
+	function left() {
+		const leftReq = new XMLHttpRequest();
+		leftReq.addEventListener("load", reqListener);
+		leftReq.open("GET", `${baseURL}/x/ccw`);
+		leftReq.send();
+	}
+	function right() {
+		const rightReq = new XMLHttpRequest();
+		rightReq.addEventListener("load", reqListener);
+		rightReq.open("GET", `${baseURL}/x/cw`);
+		rightReq.send();
+	}
+	
+	function ystop() {
+		const ystopReq = new XMLHttpRequest();
+		ystopReq.addEventListener("load", reqListener);
+		ystopReq.open("GET", `${baseURL}/y/stop`);
+		ystopReq.send();
+	}
+	function xstop() {
+		const xstopReq = new XMLHttpRequest();
+		xstopReq.addEventListener("load", reqListener);
+		xstopReq.open("GET", `${baseURL}/x/stop`);
+		xstopReq.send();
+	}
+    </script>
+    
+    <!-- Styling -->
+    <style>
+      .control-container {
+        /* Set Control Container to full width */
+        width: 100%;
+      }
+    </style>
+  </body>
+</html>
