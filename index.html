@@ -19,49 +19,26 @@
 	// URL to the OpenCamRemote REST API
 	var baseURL = prompt("What is the URL to the server?", "http://opencamremote:8080");
 	
-	// Request Listener
-	function reqListener() {
-		console.log(this.responseText);
-	}
-	
 	// Button Functions
-	function up() {
-		const upReq = new XMLHttpRequest();
-		upReq.addEventListener("load", reqListener);
-		upReq.open("GET", `${baseURL}/y/ccw`);
-		upReq.send();
+	const up = async () => {
+		const response = await fetch(`${baseURL}/y/ccw`);
 	}
-	function down() {
-		const downReq = new XMLHttpRequest();
-		downReq.addEventListener("load", reqListener);
-		downReq.open("GET", `${baseURL}/y/cw`);
-		downReq.send();
+	const down = async () => {
+		const response = await fetch(`${baseURL}/y/cw`);
 	}
 	
-	function left() {
-		const leftReq = new XMLHttpRequest();
-		leftReq.addEventListener("load", reqListener);
-		leftReq.open("GET", `${baseURL}/x/ccw`);
-		leftReq.send();
+	const left = async () => {
+		const response = await fetch(`${baseURL}/x/ccw`);
 	}
-	function right() {
-		const rightReq = new XMLHttpRequest();
-		rightReq.addEventListener("load", reqListener);
-		rightReq.open("GET", `${baseURL}/x/cw`);
-		rightReq.send();
+	const right = async () => {
+		const response = await fetch(`${baseURL}/x/cw`);
 	}
 	
-	function ystop() {
-		const ystopReq = new XMLHttpRequest();
-		ystopReq.addEventListener("load", reqListener);
-		ystopReq.open("GET", `${baseURL}/y/stop`);
-		ystopReq.send();
+	const ystop = async () => {
+		const response = await fetch(`${baseURL}/y/stop`);
 	}
-	function xstop() {
-		const xstopReq = new XMLHttpRequest();
-		xstopReq.addEventListener("load", reqListener);
-		xstopReq.open("GET", `${baseURL}/x/stop`);
-		xstopReq.send();
+	const xstop = async () => {
+		const response = await fetch(`${baseURL}/x/stop`);
 	}
     </script>
     
